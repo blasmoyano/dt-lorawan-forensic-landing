@@ -1,0 +1,61 @@
+---
+import { nodes } from '../data/media';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="section" id="nodos">
+  <div class="container">
+    <header class="head">
+      <span class="eyebrow reveal">Hardware</span>
+      <h2 class="reveal" data-delay="1">Los <span class="gradient-text">nodos</span> del laboratorio</h2>
+      <p class="lead reveal" data-delay="2">Dispositivos LoRaWAN y gateway utilizados para generar y capturar el tráfico analizado por K2SO.</p>
+    </header>
+
+    <div class="gallery">
+      {nodes.map((n, i) => (
+        <figure class="item panel reveal" data-delay={String((i % 4) + 1)}>
+          <div class="media">
+            {n.src ? (
+              <img src={`${base}/${n.src.replace(/^\//, '')}`} alt={`${n.title} — ${n.caption}`} loading="lazy" />
+            ) : (
+              <div class="ph" aria-label="Foto pendiente">
+                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                  <rect x="6" y="6" width="12" height="12" rx="2" />
+                  <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+                <span class="mono">FOTO PENDIENTE</span>
+              </div>
+            )}
+            <span class="id mono">#{String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <figcaption>
+            <strong>{n.title}</strong>
+            <span>{n.caption}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .head { max-width: 720px; margin-bottom: 3rem; }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+  .item { margin: 0; overflow: hidden; transition: transform 0.35s ease, border-color 0.35s; }
+  .item:hover { transform: translateY(-6px); border-color: var(--line-strong); }
+  .media { aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: #070c15; }
+  .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .item:hover .media img { transform: scale(1.06); }
+  .ph {
+    position: absolute; inset: 12px; display: grid; place-content: center; justify-items: center; gap: 0.8rem;
+    border: 1px dashed var(--line-strong); border-radius: 12px; color: var(--cyan-2);
+    background: radial-gradient(circle, rgba(94, 231, 255, 0.07), transparent 70%);
+  }
+  .ph span { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--muted); }
+  .id { position: absolute; top: 12px; right: 14px; font-size: 0.7rem; color: var(--cyan); background: rgba(5, 8, 15, 0.7); padding: 0.15rem 0.5rem; border-radius: 6px; }
+  figcaption { padding: 1rem 1.1rem 1.2rem; display: grid; gap: 0.2rem; }
+  figcaption span { color: var(--muted); font-size: 0.88rem; }
+  @media (max-width: 960px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
+</style>

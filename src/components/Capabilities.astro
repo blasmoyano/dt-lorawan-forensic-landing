@@ -1,0 +1,89 @@
+---
+const items = [
+  {
+    code: '01',
+    title: 'Adquisición',
+    text: 'Captura del tráfico LoRaWAN (uplinks, downlinks, joins y metadatos de radio) desde gateways y servidores de red.',
+    icon: '<path d="M5 12a7 7 0 0 1 14 0"/><path d="M8.5 12a3.5 3.5 0 0 1 7 0"/><circle cx="12" cy="12" r="1.2"/><path d="M12 13v8"/>',
+  },
+  {
+    code: '02',
+    title: 'Preservación',
+    text: 'Almacenamiento inmutable con hashes criptográficos y cadena de custodia para garantizar la integridad de la evidencia.',
+    icon: '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/>',
+  },
+  {
+    code: '03',
+    title: 'Consulta de evidencia',
+    text: 'Búsqueda y filtrado por dispositivo, ventana temporal, frecuencia, contadores de trama o métricas de señal.',
+    icon: '<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>',
+  },
+  {
+    code: '04',
+    title: 'Gemelo digital',
+    text: 'Modelo del comportamiento esperado de la red que contrasta lo observado y genera indicios explicables.',
+    icon: '<rect x="3" y="4" width="8" height="8" rx="1.5"/><rect x="13" y="12" width="8" height="8" rx="1.5"/><path d="M11 8h4a2 2 0 0 1 2 2v2M13 16H9a2 2 0 0 1-2-2v-2"/>',
+  },
+  {
+    code: '05',
+    title: 'Investigación de casos',
+    text: 'Agrupación de indicios y evidencia en casos, con notas, línea de tiempo y trazabilidad hasta el paquete original.',
+    icon: '<path d="M4 7h16v12H4z"/><path d="M9 7V5h6v2"/><path d="M4 12h16"/>',
+  },
+  {
+    code: '06',
+    title: 'Informes verificables',
+    text: 'Exportación de informes y paquetes de evidencia firmados por hash, reproducibles y verificables por terceros.',
+    icon: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><path d="m10 15 2 2 4-4"/>',
+  },
+];
+---
+
+<section class="section" id="capacidades">
+  <div class="container">
+    <header class="head">
+      <span class="eyebrow reveal">Capacidades</span>
+      <h2 class="reveal" data-delay="1">Del paquete de radio al <span class="gradient-text">informe forense</span></h2>
+      <p class="lead reveal" data-delay="2">Cada etapa conserva la trazabilidad con la anterior, de modo que cualquier conclusión pueda reconstruirse a partir de la evidencia original.</p>
+    </header>
+
+    <div class="cards">
+      {items.map((it, i) => (
+        <article class="card panel reveal" data-delay={String((i % 3) + 1)}>
+          <div class="card-top">
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={it.icon} />
+            </span>
+            <span class="code mono">{it.code}</span>
+          </div>
+          <h3>{it.title}</h3>
+          <p>{it.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .head { max-width: 760px; margin-bottom: 3.2rem; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .card {
+    padding: 1.7rem; position: relative; overflow: hidden;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s;
+    background: radial-gradient(400px 200px at 0% 0%, rgba(94, 231, 255, 0.12), transparent 70%);
+  }
+  .card:hover { transform: translateY(-6px); border-color: var(--line-strong); box-shadow: 0 24px 50px -30px rgba(94, 231, 255, 0.5); }
+  .card:hover::before { opacity: 1; }
+  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.3rem; }
+  .icon {
+    display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px;
+    color: var(--cyan); background: rgba(94, 231, 255, 0.08); border: 1px solid var(--line-strong);
+  }
+  .code { font-size: 0.8rem; color: var(--muted); }
+  .card p { color: var(--muted); margin: 0; font-size: 0.97rem; }
+  @media (max-width: 960px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+</style>

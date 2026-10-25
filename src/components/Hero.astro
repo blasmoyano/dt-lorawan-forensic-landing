@@ -1,0 +1,119 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow reveal">Prueba de concepto · TFG</span>
+      <h1 class="reveal" data-delay="1">
+        <span class="gradient-text">K2SO</span>
+        <span class="h1-sub">Gemelo digital forense para redes LoRaWAN</span>
+      </h1>
+      <p class="lead reveal" data-delay="2">
+        Adquirí y preservá tráfico LoRaWAN, consultá evidencia, generá indicios mediante un gemelo
+        digital e investigá casos con informes y paquetes verificables. Todo en local.
+      </p>
+      <div class="cta reveal" data-delay="3">
+        <a class="btn btn-primary" href="#demo" id="hero-cta-demo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          Ver demo
+        </a>
+        <a class="btn" href="#capacidades" id="hero-cta-capacidades">Explorar capacidades →</a>
+      </div>
+
+      <dl class="stats reveal" data-delay="4">
+        <div><dt class="mono">MODO</dt><dd>Local</dd></div>
+        <div><dt class="mono">RED</dt><dd>LoRaWAN</dd></div>
+        <div><dt class="mono">SALIDA</dt><dd>Informes verificables</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero-visual reveal" data-delay="2" aria-hidden="true">
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      <img class="robot-art robot" src={`${base}/images/k2so-full.jpg`} alt="" width="400" height="400" />
+      <div class="scan"></div>
+
+      <div class="hud hud-tl mono">
+        <span class="dot"></span> uplink · SF7BW125<br />
+        <span class="dim">DevAddr 26 0B ** **</span>
+      </div>
+      <div class="hud hud-br mono">
+        sha256 ✓ <span class="dim">preservado</span><br />
+        <span class="amber">▲ indicio</span> <span class="dim">en análisis</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="packets" aria-hidden="true">
+    <div class="track mono">
+      {Array.from({ length: 2 }).map(() => (
+        <span>
+          ▸ JoinRequest  DevEUI 70B3D5…  RSSI -97  SNR 7.5 &nbsp;&nbsp;
+          ▸ UnconfirmedDataUp  FCnt 0412  868.1 MHz &nbsp;&nbsp;
+          ▸ JoinAccept  DevAddr 260B…  &nbsp;&nbsp;
+          ▸ ConfirmedDataUp  FCnt 0413  RSSI -101  SNR 5.0 &nbsp;&nbsp;
+          ▸ hash 9f2c…e81a  cadena de custodia OK &nbsp;&nbsp;
+        </span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding: 120px 0 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
+  h1 { font-size: clamp(3.6rem, 9vw, 7rem); font-weight: 700; margin-bottom: 1.4rem; }
+  h1 .gradient-text { display: block; letter-spacing: -0.04em; }
+  .h1-sub { display: block; font-size: clamp(1.35rem, 2.6vw, 2rem); font-weight: 500; color: #fff; margin-top: 0.6rem; letter-spacing: -0.01em; }
+  .cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 2rem 0 2.6rem; }
+
+  .stats { display: flex; gap: 2.4rem; margin: 0; flex-wrap: wrap; }
+  .stats div { border-left: 1px solid var(--line-strong); padding-left: 1rem; }
+  .stats dt { font-size: 0.7rem; letter-spacing: 0.16em; color: var(--muted); }
+  .stats dd { margin: 0.2rem 0 0; font-weight: 600; color: #fff; }
+
+  .hero-visual { position: relative; aspect-ratio: 1; max-width: 540px; width: 100%; justify-self: center; }
+  .robot { position: absolute; inset: 6%; width: 88%; height: 88%; object-fit: contain; animation: float 7s ease-in-out infinite; }
+  .ring { position: absolute; border-radius: 50%; border: 1px solid var(--line-strong); inset: 0; }
+  .r1 { inset: 4%; border-style: dashed; animation: spin 60s linear infinite; }
+  .r2 { inset: 16%; border-color: rgba(60, 242, 192, 0.18); animation: spin 40s linear infinite reverse; }
+  .r3 { inset: 30%; background: radial-gradient(circle, rgba(94, 231, 255, 0.18), transparent 70%); border: none; filter: blur(10px); }
+  .scan {
+    position: absolute; left: 10%; right: 10%; height: 2px; top: 10%;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    box-shadow: 0 0 18px var(--cyan);
+    animation: scan 4.5s ease-in-out infinite;
+    opacity: 0.8;
+  }
+  .hud {
+    position: absolute; font-size: 0.72rem; line-height: 1.6; padding: 0.7rem 0.9rem;
+    background: rgba(8, 14, 24, 0.75); border: 1px solid var(--line-strong); border-radius: 12px;
+    backdrop-filter: blur(8px); color: var(--text);
+  }
+  .hud-tl { top: 8%; left: -4%; animation: float 6s ease-in-out infinite; }
+  .hud-br { bottom: 10%; right: -4%; animation: float 6s ease-in-out -3s infinite; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); margin-right: 4px; }
+  .dim { color: var(--muted); }
+  .amber { color: var(--amber); }
+
+  .packets {
+    margin-top: 4rem; border-block: 1px solid var(--line); overflow: hidden;
+    background: rgba(10, 17, 29, 0.6);
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .track { display: flex; width: max-content; padding: 0.9rem 0; font-size: 0.78rem; color: var(--muted); white-space: nowrap; animation: marquee 40s linear infinite; }
+
+  @keyframes float { 50% { transform: translateY(-10px); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes scan { 0%, 100% { top: 12%; } 50% { top: 86%; } }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { max-width: 380px; order: -1; }
+    .hud-tl { left: 0; } .hud-br { right: 0; }
+  }
+</style>

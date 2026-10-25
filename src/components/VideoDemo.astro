@@ -1,0 +1,78 @@
+---
+import { video } from '../data/media';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const asset = (p?: string) => (p ? `${base}/${p.replace(/^\//, '')}` : undefined);
+---
+
+<section class="section" id="demo">
+  <div class="container">
+    <header class="head">
+      <span class="eyebrow reveal">Demo</span>
+      <h2 class="reveal" data-delay="1">K2SO <span class="gradient-text">en acción</span></h2>
+      <p class="lead reveal" data-delay="2">Recorrido por la adquisición, la consulta de evidencia y la investigación de un caso.</p>
+    </header>
+
+    <div class="player panel reveal" data-delay="2">
+      <div class="bar mono" aria-hidden="true">
+        <span class="lights"><i></i><i></i><i></i></span>
+        <span>k2so://demo</span>
+        <span class="rec">● REC</span>
+      </div>
+      <div class="screen">
+        {video.type === 'youtube' && (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+            title={video.title ?? 'Demo de K2SO'}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        )}
+        {video.type === 'file' && (
+          <video controls preload="metadata" poster={asset(video.poster)} title={video.title ?? 'Demo de K2SO'}>
+            <source src={asset(video.src)} type="video/mp4" />
+          </video>
+        )}
+        {video.type === 'none' && (
+          <div class="placeholder">
+            <div class="play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <p class="mono">VIDEO PRÓXIMAMENTE</p>
+            <small>Configurá el video en <code>src/data/media.ts</code></small>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .head { text-align: center; margin: 0 auto 3rem; max-width: 720px; }
+  .head .lead { margin-inline: auto; }
+  .player { max-width: 1000px; margin: 0 auto; overflow: hidden; box-shadow: 0 40px 100px -40px rgba(94, 231, 255, 0.35); }
+  .bar { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--line); font-size: 0.75rem; color: var(--muted); }
+  .lights { display: flex; gap: 6px; }
+  .lights i { width: 10px; height: 10px; border-radius: 50%; background: #253248; }
+  .lights i:first-child { background: var(--red); } .lights i:nth-child(2) { background: var(--amber); } .lights i:last-child { background: var(--teal); }
+  .rec { color: var(--red); animation: blink 1.6s steps(2) infinite; }
+  .screen { aspect-ratio: 16 / 9; position: relative; background: #03060b; }
+  .screen iframe, .screen video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .placeholder {
+    position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 0.8rem; text-align: center;
+    background:
+      repeating-linear-gradient(0deg, rgba(94, 231, 255, 0.035) 0 2px, transparent 2px 4px),
+      radial-gradient(circle at 50% 50%, rgba(94, 231, 255, 0.12), transparent 60%);
+  }
+  .placeholder p { margin: 0; letter-spacing: 0.25em; color: var(--cyan); font-size: 0.85rem; }
+  .placeholder small { color: var(--muted); }
+  .placeholder code { color: var(--text); background: rgba(255, 255, 255, 0.06); padding: 0.1rem 0.4rem; border-radius: 6px; }
+  .play {
+    display: grid; place-items: center; width: 86px; height: 86px; border-radius: 50%;
+    color: #021018; background: linear-gradient(120deg, var(--cyan), var(--teal));
+    box-shadow: 0 0 0 10px rgba(94, 231, 255, 0.12), 0 0 0 22px rgba(94, 231, 255, 0.05);
+    animation: ping 2.6s ease-in-out infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.2; } }
+  @keyframes ping { 50% { box-shadow: 0 0 0 16px rgba(94, 231, 255, 0.08), 0 0 0 34px rgba(94, 231, 255, 0.02); } }
+</style>

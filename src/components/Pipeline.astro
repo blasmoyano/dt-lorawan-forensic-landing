@@ -1,0 +1,62 @@
+---
+const steps = [
+  { tag: 'RF', title: 'Nodos & gateways', text: 'Tráfico LoRaWAN real del banco de pruebas.' },
+  { tag: 'ACQ', title: 'Adquirir', text: 'Captura con marca temporal y metadatos de radio.' },
+  { tag: 'HASH', title: 'Preservar', text: 'Hash + cadena de custodia. Evidencia inmutable.' },
+  { tag: 'DT', title: 'Gemelo digital', text: 'Comparación esperado vs. observado.', accent: true },
+  { tag: 'IOC', title: 'Indicios', text: 'Anomalías que requieren investigación.', warn: true },
+  { tag: 'CASE', title: 'Caso & informe', text: 'Paquete verificable y reproducible.' },
+];
+---
+
+<section class="section" id="flujo">
+  <div class="container">
+    <header class="head">
+      <span class="eyebrow reveal">Flujo forense</span>
+      <h2 class="reveal" data-delay="1">Una cadena <span class="gradient-text">trazable</span> de punta a punta</h2>
+    </header>
+
+    <ol class="pipeline">
+      {steps.map((s, i) => (
+        <li class:list={['step', 'reveal', { accent: s.accent, warn: s.warn }]} data-delay={String((i % 4) + 1)}>
+          <span class="node"><span class="mono">{s.tag}</span></span>
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .head { margin-bottom: 3.5rem; max-width: 720px; }
+  .pipeline { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; position: relative; }
+  .pipeline::before {
+    content: ''; position: absolute; top: 34px; left: 8%; right: 8%; height: 2px;
+    background: linear-gradient(90deg, var(--cyan-2), var(--teal), var(--amber), var(--cyan));
+    background-size: 200% 100%; animation: flow 6s linear infinite; opacity: 0.6;
+  }
+  .step { text-align: center; position: relative; }
+  .node {
+    display: grid; place-items: center; width: 70px; height: 70px; margin: 0 auto 1.2rem;
+    border-radius: 50%; background: var(--panel-solid); border: 1px solid var(--line-strong);
+    font-size: 0.72rem; color: var(--cyan); position: relative; z-index: 1;
+    box-shadow: 0 0 0 6px var(--bg);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .step:hover .node { transform: scale(1.08); box-shadow: 0 0 0 6px var(--bg), 0 0 24px rgba(94, 231, 255, 0.5); }
+  .accent .node { background: linear-gradient(135deg, rgba(94, 231, 255, 0.25), rgba(60, 242, 192, 0.15)); color: #fff; border-color: var(--cyan); }
+  .warn .node { color: var(--amber); border-color: rgba(255, 181, 71, 0.6); }
+  h3 { font-size: 1.02rem; margin-bottom: 0.4rem; }
+  p { color: var(--muted); font-size: 0.9rem; margin: 0; }
+  @keyframes flow { to { background-position: -200% 0; } }
+
+  @media (max-width: 960px) {
+    .pipeline { grid-template-columns: 1fr; gap: 1.6rem; }
+    .pipeline::before { top: 0; bottom: 0; left: 34px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--cyan-2), var(--teal), var(--amber), var(--cyan)); }
+    .step { display: grid; grid-template-columns: 70px 1fr; column-gap: 1.2rem; text-align: left; align-items: center; }
+    .node { grid-row: span 2; margin: 0; }
+    h3 { margin: 0; align-self: end; }
+    p { align-self: start; }
+  }
+</style>

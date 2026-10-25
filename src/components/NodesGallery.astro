@@ -6,9 +6,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <section class="section" id="nodos">
   <div class="container">
     <header class="head">
-      <span class="eyebrow reveal">Hardware</span>
-      <h2 class="reveal" data-delay="1">Los <span class="gradient-text">nodos</span> del laboratorio</h2>
-      <p class="lead reveal" data-delay="2">Dispositivos LoRaWAN y gateway utilizados para generar y capturar el tráfico analizado por K2SO.</p>
+      <span class="eyebrow reveal">Entorno Experimental</span>
+      <h2 class="reveal" data-delay="1">El <span class="gradient-text">banco de pruebas</span> del TFG</h2>
+      <p class="lead reveal" data-delay="2">
+        Dispositivos físicos y concentradores integrados bajo el plan regional AU915-928 para la generación, captura y ataque controlado de telemetría.
+      </p>
     </header>
 
     <div class="gallery">
@@ -16,22 +18,23 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <figure class="item panel reveal" data-delay={String((i % 4) + 1)}>
           <div class="media">
             {n.src ? (
-              <img src={`${base}/${n.src.replace(/^\//, '')}`} alt={`${n.title} — ${n.caption}`} loading="lazy" />
+              <img src={`${base}/${n.src.replace(/^\//, '')}`} alt={`${n.title} — ${n.spec}`} loading="lazy" />
             ) : (
               <div class="ph" aria-label="Foto pendiente">
-                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
                   <rect x="6" y="6" width="12" height="12" rx="2" />
                   <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
                   <circle cx="12" cy="12" r="2" />
                 </svg>
-                <span class="mono">FOTO PENDIENTE</span>
+                <span class="mono">FOTO DEL BANCO</span>
               </div>
             )}
             <span class="id mono">#{String(i + 1).padStart(2, '0')}</span>
           </div>
           <figcaption>
+            <span class="spec mono">{n.spec}</span>
             <strong>{n.title}</strong>
-            <span>{n.caption}</span>
+            <p>{n.caption}</p>
           </figcaption>
         </figure>
       ))}
@@ -40,22 +43,25 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </section>
 
 <style>
-  .head { max-width: 720px; margin-bottom: 3rem; }
-  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
-  .item { margin: 0; overflow: hidden; transition: transform 0.35s ease, border-color 0.35s; }
+  .head { max-width: 760px; margin-bottom: 3rem; }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.3rem; }
+  .item { margin: 0; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.35s ease, border-color 0.35s; }
   .item:hover { transform: translateY(-6px); border-color: var(--line-strong); }
-  .media { aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: #070c15; }
+  .media { aspect-ratio: 4 / 3.2; position: relative; overflow: hidden; background: #070c15; border-bottom: 1px solid var(--line); }
   .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
   .item:hover .media img { transform: scale(1.06); }
   .ph {
-    position: absolute; inset: 12px; display: grid; place-content: center; justify-items: center; gap: 0.8rem;
+    position: absolute; inset: 12px; display: grid; place-content: center; justify-items: center; gap: 0.6rem;
     border: 1px dashed var(--line-strong); border-radius: 12px; color: var(--cyan-2);
     background: radial-gradient(circle, rgba(94, 231, 255, 0.07), transparent 70%);
   }
-  .ph span { font-size: 0.68rem; letter-spacing: 0.2em; color: var(--muted); }
-  .id { position: absolute; top: 12px; right: 14px; font-size: 0.7rem; color: var(--cyan); background: rgba(5, 8, 15, 0.7); padding: 0.15rem 0.5rem; border-radius: 6px; }
-  figcaption { padding: 1rem 1.1rem 1.2rem; display: grid; gap: 0.2rem; }
-  figcaption span { color: var(--muted); font-size: 0.88rem; }
+  .ph span { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); }
+  .id { position: absolute; top: 12px; right: 14px; font-size: 0.7rem; color: var(--cyan); background: rgba(5, 8, 15, 0.75); padding: 0.15rem 0.5rem; border-radius: 6px; }
+  figcaption { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.3rem; flex-grow: 1; }
+  .spec { font-size: 0.72rem; color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase; }
+  figcaption strong { font-size: 1.05rem; color: #fff; }
+  figcaption p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; margin: 0.3rem 0 0; }
+  
   @media (max-width: 960px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
+  @media (max-width: 540px) { .gallery { grid-template-columns: 1fr; } }
 </style>

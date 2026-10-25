@@ -4,23 +4,54 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container inner">
-    <div>
-      <strong class="brand">K2SO</strong>
-      <p>Gemelo digital forense para redes LoRaWAN · Prueba de concepto (TFG).</p>
+    <div class="col-left">
+      <div class="brand-row">
+        <strong class="brand">K2SO</strong>
+        <span class="academic-tag mono">// TFG 2026</span>
+      </div>
+      <p class="desc">
+        Gemelo Digital Como Plataforma Forense Para Análisis de Redes LoRaWAN.
+      </p>
+      <div class="academic-credits">
+        <span><strong>Blas Moyano</strong> · Licenciatura en Seguridad Informática</span>
+        <span class="dim">Universidad Siglo 21 · Seminario Final</span>
+      </div>
     </div>
-    <div class="right mono">
-      <a href="https://github.com/blasmoyano/dt-lorawan-forensic-landing" id="footer-github" target="_blank" rel="noopener">GitHub ↗</a>
-      <a href="#inicio" id="footer-top">Volver arriba ↑</a>
+    
+    <div class="col-right mono">
+      <div class="links">
+        <a href="https://github.com/blasmoyano/dt-lorawan-forensic-landing" id="footer-github" target="_blank" rel="noopener">Repositorio GitHub ↗</a>
+        <a href="#inicio" id="footer-top">Volver arriba ↑</a>
+      </div>
+      <span class="framework dim">Desarrollado con Astro 🚀</span>
     </div>
   </div>
-  <div class="container legal mono">© {year} · Una anomalía es un indicio, no una confirmación de ataque.</div>
+  
+  <div class="container legal mono">
+    © {year} · Universidad Siglo 21 · Una anomalía es un indicio que requiere investigación; no confirma por sí sola un ataque.
+  </div>
 </footer>
 
 <style>
-  .footer { border-top: 1px solid var(--line); padding: 3rem 0 2rem; background: rgba(5, 8, 15, 0.6); }
-  .inner { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; align-items: flex-start; }
-  .brand { font-size: 1.3rem; letter-spacing: 0.06em; }
-  p { color: var(--muted); margin: 0.4rem 0 0; }
-  .right { display: flex; gap: 1.5rem; font-size: 0.85rem; }
-  .legal { margin-top: 2.5rem; font-size: 0.72rem; color: var(--muted); opacity: 0.7; }
+  .footer { border-top: 1px solid var(--line); padding: 3.5rem 0 2.2rem; background: rgba(5, 8, 15, 0.7); }
+  .inner { display: flex; justify-content: space-between; gap: 2.5rem; flex-wrap: wrap; align-items: flex-start; }
+  
+  .col-left { max-width: 580px; }
+  .brand-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+  .brand { font-size: 1.4rem; letter-spacing: 0.06em; color: #fff; }
+  .academic-tag { font-size: 0.75rem; color: var(--cyan); background: rgba(94, 231, 255, 0.1); padding: 0.15rem 0.5rem; border-radius: 4px; }
+  .desc { color: var(--text); margin: 0 0 0.8rem; font-size: 0.98rem; font-weight: 500; }
+  .academic-credits { display: flex; flex-direction: column; gap: 0.2rem; font-size: 0.88rem; color: var(--muted); }
+  .academic-credits strong { color: var(--text); }
+  .dim { color: var(--muted); font-size: 0.82rem; }
+
+  .col-right { display: flex; flex-direction: column; gap: 1rem; align-items: flex-end; }
+  .links { display: flex; gap: 1.5rem; font-size: 0.88rem; }
+  .framework { font-size: 0.78rem; }
+
+  .legal { margin-top: 2.5rem; font-size: 0.75rem; color: var(--muted); opacity: 0.75; }
+
+  @media (max-width: 768px) {
+    .col-right { align-items: flex-start; }
+  }
 </style>

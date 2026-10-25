@@ -6,34 +6,41 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <div class="container grid">
     <div class="art reveal">
       <div class="frame panel">
-        <img class="robot-art" src={`${base}/images/k2so-bust.jpg`} alt="Ilustración de K2SO, el droide que da nombre al proyecto" width="1920" height="1920" loading="lazy" />
+        <img class="robot-art" src={`${base}/images/k2so-bust.jpg`} alt="Ilustración de K2SO, droide representativo del proyecto" width="1920" height="1920" loading="lazy" />
         <span class="corner tl"></span><span class="corner tr"></span>
         <span class="corner bl"></span><span class="corner br"></span>
-        <span class="label mono">UNIT · K-2SO</span>
+        <span class="label mono">UNIT · K-2SO // FORENSIC-DT</span>
       </div>
     </div>
 
     <div class="copy">
-      <span class="eyebrow reveal">Qué es K2SO</span>
-      <h2 class="reveal" data-delay="1">Un gemelo digital al servicio de la <span class="gradient-text">evidencia</span></h2>
+      <span class="eyebrow reveal">Problemática & Solución</span>
+      <h2 class="reveal" data-delay="1">Preservar la evidencia que el <span class="gradient-text">Network Server descarta</span></h2>
       <p class="reveal" data-delay="2">
-        K2SO es una prueba de concepto local para adquirir y preservar tráfico LoRaWAN, consultar
-        evidencia, generar indicios mediante un gemelo digital e investigar casos con informes y
-        paquetes verificables.
+        En despliegues agroindustriales (silobolsas y plantas de acopio), la manipulación de variables como temperatura y humedad puede causar pérdidas millonarias. Sin embargo, ante un incidente, los servidores tradicionales como <strong>ChirpStack</strong> descartan tramas anómalas o duplicadas por diseño, destruyendo la evidencia del ataque.
       </p>
       <p class="reveal muted" data-delay="2">
-        El gemelo digital modela el comportamiento esperado de la red y sus dispositivos. Cuando la
-        realidad observada se aparta del modelo, K2SO lo registra como un indicio trazable hasta el
-        tráfico original preservado.
+        <strong>K2SO</strong> introduce una arquitectura desacoplada y no intrusiva: intercepta pasivamente el socket UDP/1700 antes del Gateway Bridge, genera un <strong>gemelo digital</strong> que modela el comportamiento esperado del dispositivo (cadencia, contadores de trama y rangos físicos) y sella los paquetes originales con hashes y firmas para garantizar su admisibilidad forense.
       </p>
+
+      <div class="key-facts reveal" data-delay="3">
+        <div class="fact-item">
+          <span class="fact-title mono">0% IMPACTO</span>
+          <span class="fact-desc">Comprobada no intrusividad sobre la red operativa en ensayos A/B/A.</span>
+        </div>
+        <div class="fact-item">
+          <span class="fact-title mono">REPLAY & JAMMING</span>
+          <span class="fact-desc">Validado experimentalmente ante ataques controlados de repetición y saturación.</span>
+        </div>
+      </div>
 
       <aside class="notice reveal" data-delay="3" role="note">
         <div class="notice-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg>
         </div>
         <div>
-          <strong>Indicio ≠ ataque.</strong>
-          Una anomalía es un indicio que requiere investigación; no confirma por sí sola un ataque.
+          <strong>Principio forense fundamental:</strong>
+          Una anomalía es un indicio que requiere investigación técnica; no confirma por sí sola un ataque ni constituye prueba concluyente sin correlación.
         </div>
       </aside>
     </div>
@@ -50,18 +57,38 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .tr { top: 14px; right: 14px; border-left: 0; border-bottom: 0; }
   .bl { bottom: 14px; left: 14px; border-right: 0; border-top: 0; }
   .br { bottom: 14px; right: 14px; border-left: 0; border-top: 0; }
-  .label { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; letter-spacing: 0.2em; color: var(--cyan); }
+  .label { position: absolute; top: 18px; left: 50%; transform: translateX(-50%); font-size: 0.68rem; letter-spacing: 0.18em; color: var(--cyan); white-space: nowrap; }
   .muted { color: var(--muted); }
 
+  .key-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .fact-item {
+    background: rgba(14, 23, 38, 0.6);
+    border-left: 2px solid var(--cyan);
+    padding: 0.8rem 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+  .fact-title { font-size: 0.75rem; color: var(--cyan); font-weight: 700; display: block; margin-bottom: 0.25rem; }
+  .fact-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; display: block; }
+
   .notice {
-    display: flex; gap: 1rem; align-items: flex-start; margin-top: 2rem;
-    padding: 1.2rem 1.3rem; border-radius: 14px;
+    display: flex; gap: 1rem; align-items: flex-start; margin-top: 1.8rem;
+    padding: 1.1rem 1.3rem; border-radius: 14px;
     background: linear-gradient(120deg, rgba(255, 181, 71, 0.12), rgba(255, 181, 71, 0.03));
     border: 1px solid rgba(255, 181, 71, 0.35);
     color: #f6e3c3;
+    font-size: 0.95rem;
   }
   .notice strong { color: var(--amber); margin-right: 0.3rem; }
   .notice-icon { color: var(--amber); flex: none; margin-top: 2px; }
 
-  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } .art { max-width: 440px; } }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .art { max-width: 420px; }
+    .key-facts { grid-template-columns: 1fr; }
+  }
 </style>

@@ -5,27 +5,37 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <section class="hero" id="inicio">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <span class="eyebrow reveal">Prueba de concepto · TFG</span>
+      <div class="badge-academic reveal">
+        <span class="badge-icon" aria-hidden="true">🎓</span>
+        <span>Trabajo Final de Grado · Licenciatura en Seguridad Informática</span>
+      </div>
       <h1 class="reveal" data-delay="1">
         <span class="gradient-text">K2SO</span>
-        <span class="h1-sub">Gemelo digital forense para redes LoRaWAN</span>
+        <span class="h1-sub">Gemelo Digital como Plataforma Forense para Redes LoRaWAN</span>
       </h1>
       <p class="lead reveal" data-delay="2">
-        Adquirí y preservá tráfico LoRaWAN, consultá evidencia, generá indicios mediante un gemelo
-        digital e investigá casos con informes y paquetes verificables. Todo en local.
+        Prototipo de análisis forense no intrusivo y desacoplado para entornos de monitoreo agroindustrial (silobolsas y plantas de acopio). Adquiere tráfico pasivo antes del descarte del Network Server, modela el comportamiento con un gemelo digital y genera evidencia verificable.
       </p>
+      
+      <div class="academic-meta reveal" data-delay="2">
+        <span class="univ"><strong>Universidad Siglo 21</strong></span>
+        <span class="sep">·</span>
+        <span class="author">Autor: <strong>Blas Moyano</strong></span>
+      </div>
+
       <div class="cta reveal" data-delay="3">
         <a class="btn btn-primary" href="#demo" id="hero-cta-demo">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          Ver demo
+          Ver demostraciones
         </a>
-        <a class="btn" href="#capacidades" id="hero-cta-capacidades">Explorar capacidades →</a>
+        <a class="btn" href="#capacidades" id="hero-cta-capacidades">Explorar arquitectura →</a>
       </div>
 
       <dl class="stats reveal" data-delay="4">
-        <div><dt class="mono">MODO</dt><dd>Local</dd></div>
-        <div><dt class="mono">RED</dt><dd>LoRaWAN</dd></div>
-        <div><dt class="mono">SALIDA</dt><dd>Informes verificables</dd></div>
+        <div><dt class="mono">ENTORNO</dt><dd>Agtech / Silobolsas</dd></div>
+        <div><dt class="mono">PLAN REGIONAL</dt><dd>AU915-928 (ENACOM)</dd></div>
+        <div><dt class="mono">CAPTURA</dt><dd>Pasiva Semtech UDP/1700</dd></div>
+        <div><dt class="mono">INTEGRIDAD</dt><dd>SHA-256 & Cadena</dd></div>
       </dl>
     </div>
 
@@ -37,12 +47,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <div class="scan"></div>
 
       <div class="hud hud-tl mono">
-        <span class="dot"></span> uplink · SF7BW125<br />
-        <span class="dim">DevAddr 26 0B ** **</span>
+        <span class="dot"></span> uplink · AU915 SF7BW125<br />
+        <span class="dim">SenseCAP M2 ➔ UDP:1700</span>
       </div>
       <div class="hud hud-br mono">
-        sha256 ✓ <span class="dim">preservado</span><br />
-        <span class="amber">▲ indicio</span> <span class="dim">en análisis</span>
+        sha256: 9f2c…e81a ✓<br />
+        <span class="amber">▲ indicio: Replay FCnt</span>
       </div>
     </div>
   </div>
@@ -51,11 +61,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="track mono">
       {Array.from({ length: 2 }).map(() => (
         <span>
-          ▸ JoinRequest  DevEUI 70B3D5…  RSSI -97  SNR 7.5 &nbsp;&nbsp;
-          ▸ UnconfirmedDataUp  FCnt 0412  868.1 MHz &nbsp;&nbsp;
-          ▸ JoinAccept  DevAddr 260B…  &nbsp;&nbsp;
-          ▸ ConfirmedDataUp  FCnt 0413  RSSI -101  SNR 5.0 &nbsp;&nbsp;
-          ▸ hash 9f2c…e81a  cadena de custodia OK &nbsp;&nbsp;
+          ▸ JoinRequest DevEUI 70B3D5… RSSI -97 SNR 7.5 &nbsp;&nbsp;
+          ▸ UnconfirmedDataUp FCnt 0412 917.0 MHz (AU915) &nbsp;&nbsp;
+          ▸ Captura pasiva UDP/1700 → PCAP 27.708 B &nbsp;&nbsp;
+          ▸ Replay Attack detectado: PHYPayload duplicado &nbsp;&nbsp;
+          ▸ Manifiesto SHA-256 ✓ Cadena de custodia registrada &nbsp;&nbsp;
         </span>
       ))}
     </div>
@@ -63,19 +73,47 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </section>
 
 <style>
-  .hero { padding: 120px 0 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
-  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: center; }
-  h1 { font-size: clamp(3.6rem, 9vw, 7rem); font-weight: 700; margin-bottom: 1.4rem; }
+  .hero { padding: 125px 0 0; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 3rem; align-items: center; }
+  
+  .badge-academic {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: rgba(94, 231, 255, 0.08);
+    border: 1px solid rgba(94, 231, 255, 0.25);
+    color: var(--cyan);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    margin-bottom: 1.2rem;
+  }
+  .badge-icon { font-size: 0.95rem; }
+
+  h1 { font-size: clamp(3.2rem, 8vw, 6rem); font-weight: 700; margin-bottom: 1.2rem; line-height: 1.08; }
   h1 .gradient-text { display: block; letter-spacing: -0.04em; }
-  .h1-sub { display: block; font-size: clamp(1.35rem, 2.6vw, 2rem); font-weight: 500; color: #fff; margin-top: 0.6rem; letter-spacing: -0.01em; }
-  .cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 2rem 0 2.6rem; }
+  .h1-sub { display: block; font-size: clamp(1.2rem, 2.3vw, 1.75rem); font-weight: 500; color: #fff; margin-top: 0.6rem; letter-spacing: -0.01em; line-height: 1.25; }
+  
+  .academic-meta {
+    margin: 1.2rem 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .academic-meta strong { color: #fff; }
+  .academic-meta .sep { opacity: 0.4; }
 
-  .stats { display: flex; gap: 2.4rem; margin: 0; flex-wrap: wrap; }
-  .stats div { border-left: 1px solid var(--line-strong); padding-left: 1rem; }
-  .stats dt { font-size: 0.7rem; letter-spacing: 0.16em; color: var(--muted); }
-  .stats dd { margin: 0.2rem 0 0; font-weight: 600; color: #fff; }
+  .cta { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.8rem 0 2.2rem; }
 
-  .hero-visual { position: relative; aspect-ratio: 1; max-width: 540px; width: 100%; justify-self: center; }
+  .stats { display: flex; gap: 1.8rem; margin: 0; flex-wrap: wrap; }
+  .stats div { border-left: 1px solid var(--line-strong); padding-left: 0.9rem; }
+  .stats dt { font-size: 0.68rem; letter-spacing: 0.15em; color: var(--muted); }
+  .stats dd { margin: 0.15rem 0 0; font-weight: 600; font-size: 0.92rem; color: #fff; }
+
+  .hero-visual { position: relative; aspect-ratio: 1; max-width: 520px; width: 100%; justify-self: center; }
   .robot { position: absolute; inset: 6%; width: 88%; height: 88%; object-fit: contain; animation: float 7s ease-in-out infinite; }
   .ring { position: absolute; border-radius: 50%; border: 1px solid var(--line-strong); inset: 0; }
   .r1 { inset: 4%; border-style: dashed; animation: spin 60s linear infinite; }
@@ -90,7 +128,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
   .hud {
     position: absolute; font-size: 0.72rem; line-height: 1.6; padding: 0.7rem 0.9rem;
-    background: rgba(8, 14, 24, 0.75); border: 1px solid var(--line-strong); border-radius: 12px;
+    background: rgba(8, 14, 24, 0.85); border: 1px solid var(--line-strong); border-radius: 12px;
     backdrop-filter: blur(8px); color: var(--text);
   }
   .hud-tl { top: 8%; left: -4%; animation: float 6s ease-in-out infinite; }
@@ -100,11 +138,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .amber { color: var(--amber); }
 
   .packets {
-    margin-top: 4rem; border-block: 1px solid var(--line); overflow: hidden;
+    margin-top: 3.5rem; border-block: 1px solid var(--line); overflow: hidden;
     background: rgba(10, 17, 29, 0.6);
     mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
   }
-  .track { display: flex; width: max-content; padding: 0.9rem 0; font-size: 0.78rem; color: var(--muted); white-space: nowrap; animation: marquee 40s linear infinite; }
+  .track { display: flex; width: max-content; padding: 0.85rem 0; font-size: 0.78rem; color: var(--muted); white-space: nowrap; animation: marquee 42s linear infinite; }
 
   @keyframes float { 50% { transform: translateY(-10px); } }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -113,7 +151,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .hero-visual { max-width: 380px; order: -1; }
+    .hero-visual { max-width: 360px; order: -1; }
     .hud-tl { left: 0; } .hud-br { right: 0; }
   }
 </style>

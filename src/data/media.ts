@@ -49,25 +49,25 @@ export interface NodePhoto {
 /** Fotos de los dispositivos del laboratorio (Heltec WiFi LoRa 32 V4, SenseCAP M2, Sensores). */
 export const nodes: NodePhoto[] = [
   {
-    src: '',
+    src: 'images/nodos/nodo.jpeg',
     title: 'Nodos Sensores (x2)',
     spec: 'Heltec WiFi LoRa 32 V4 + BME280',
     caption: 'End-devices clase A encargados de telemetría ambiental (temperatura y humedad) para silobolsas y plantas de acopio.',
   },
   {
-    src: '',
+    src: 'images/nodos/gateway_sensecap.jpeg',
     title: 'Gateway LoRaWAN',
     spec: 'Seeed Studio SenseCAP M2',
     caption: 'Concentrador multicanal configurado en plan regional AU915-928 (resolución ENACOM 4653/2019).',
   },
   {
-    src: '',
+    src: 'images/nodos/nodo_atacante.jpeg',
     title: 'Nodo Atacante',
     spec: 'Heltec WiFi LoRa 32 V4',
     caption: 'Dispositivo dedicado a la generación controlada de ataques de repetición (replay de PHYPayload) y saturación del canal.',
   },
   {
-    src: '',
+    src: 'images/nodos/entorno_prueba.jpeg',
     title: 'Banco de Pruebas Integrado',
     spec: 'Host Ubuntu + ChirpStack + Capturador',
     caption: 'Entorno de laboratorio local con captura pasiva por socket UDP/1700, preservación en SQLite y gemelo digital.',

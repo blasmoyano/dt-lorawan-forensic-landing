@@ -6,10 +6,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <div class="container grid">
     <div class="art reveal">
       <div class="frame panel">
-        <img class="robot-art" src={`${base}/images/k2so-bust.jpg`} alt="Ilustración de K2SO, droide representativo del proyecto" width="1920" height="1920" loading="lazy" />
+        <img src={`${base}/images/nodos/entorno_prueba.jpeg`} alt="Banco de pruebas del laboratorio" width="800" height="600" loading="lazy" />
         <span class="corner tl"></span><span class="corner tr"></span>
         <span class="corner bl"></span><span class="corner br"></span>
-        <span class="label mono">UNIT · K-2SO // FORENSIC-DT</span>
+        <span class="label mono">LAB TESTBED // FORENSIC-DT</span>
       </div>
     </div>
 
@@ -20,17 +20,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         En despliegues agroindustriales (silobolsas y plantas de acopio), la manipulación de variables como temperatura y humedad puede causar pérdidas millonarias. Sin embargo, ante un incidente, los servidores tradicionales como <strong>ChirpStack</strong> descartan tramas anómalas o duplicadas por diseño, destruyendo la evidencia del ataque.
       </p>
       <p class="reveal muted" data-delay="2">
-        <strong>K2SO</strong> introduce una arquitectura desacoplada y no intrusiva: intercepta pasivamente el socket UDP/1700 antes del Gateway Bridge, genera un <strong>gemelo digital</strong> que modela el comportamiento esperado del dispositivo (cadencia, contadores de trama y rangos físicos) y sella los paquetes originales con hashes y firmas para garantizar su admisibilidad forense.
+        El <strong>prototipo forense</strong> introduce una arquitectura desacoplada y no intrusiva: intercepta pasivamente el socket UDP/1700 antes del Gateway Bridge, genera un <strong>gemelo digital</strong> que modela el comportamiento esperado del dispositivo (cadencia, contadores de trama y rangos físicos) y sella los paquetes originales con hashes SHA-256 y firmas Ed25519 con cadena de custodia.
       </p>
 
       <div class="key-facts reveal" data-delay="3">
         <div class="fact-item">
-          <span class="fact-title mono">0% IMPACTO</span>
-          <span class="fact-desc">Comprobada no intrusividad sobre la red operativa en ensayos A/B/A.</span>
+          <span class="fact-title mono">NO INTRUSIVO</span>
+          <span class="fact-desc">Comprobada continuidad operativa de la red en ensayos A/B/A sin alteración del tráfico.</span>
         </div>
         <div class="fact-item">
-          <span class="fact-title mono">REPLAY & JAMMING</span>
-          <span class="fact-desc">Validado experimentalmente ante ataques controlados de repetición y saturación.</span>
+          <span class="fact-title mono">REPLAY CONTROLADO</span>
+          <span class="fact-desc">Validado ante repetición de tramas con nodo Heltec atacante y prueba de ingesta UDP sintética.</span>
         </div>
       </div>
 

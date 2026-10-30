@@ -10,6 +10,7 @@ export interface VideoItem {
   title: string;
   category: string;
   description: string;
+  highlights?: string[];
 }
 
 /**
@@ -19,19 +20,23 @@ export interface VideoItem {
  */
 export const videos: VideoItem[] = [
   {
-    title: 'Adquisición Pasiva y Captura en Vivo',
-    category: 'Módulo de Captura',
-    description: 'Demostración de interceptación no intrusiva UDP/1700 antes del ChirpStack Gateway Bridge sin afectar la red operativa.',
+    src: 'video/captura.mp4',
+    title: 'Video 1 — Captura pasiva de tráfico LoRaWAN y continuidad operativa',
+    category: 'Módulo de Captura Pasiva',
+    description: 'Demostración de la comunicación de dos nodos con ChirpStack, activación del capturador en socket UDP/1700, consulta de observaciones y metadatos, preservación del PCAP original y comprobación de continuidad operativa al detener el capturador (respaldado por los ensayos A/B/A).',
+    highlights: ['Semtech UDP/1700', 'Continuidad A/B/A', 'Integridad SHA-256', 'Preservación PCAP'],
   },
   {
-    title: 'Ataque de Replay y Detección en Gemelo Digital',
-    category: 'Escenario de Incidente',
-    description: 'Inyección de tramas repetidas mediante nodo atacante Heltec V4, detección de anomalías de contador y preservación forense.',
+    title: 'Video 2 — Ataque de Replay y Detección en Gemelo Digital',
+    category: 'Escenario Experimental',
+    description: 'Inyección de tramas repetidas mediante nodo atacante Heltec V4, detección de anomalías de contador y preservación forense de la evidencia.',
+    highlights: ['Nodo Heltec Atacante', 'Replay PHYPayload', 'Regla CONTADOR-01'],
   },
   {
-    title: 'Reconstrucción de Caso y Paquete de Evidencia',
+    title: 'Video 3 — Reconstrucción de Caso y Paquete de Evidencia',
     category: 'Plataforma Forense',
-    description: 'Línea de tiempo del incidente, verificación de hashes SHA-256 y exportación del paquete forense verificable.',
+    description: 'Línea de tiempo del incidente, verificación independiente de hashes y exportación del paquete forense verificable con firma digital Ed25519.',
+    highlights: ['Línea de Tiempo', 'Firma Ed25519', 'Cadena de Custodia'],
   },
 ];
 

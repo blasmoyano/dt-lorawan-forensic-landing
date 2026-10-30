@@ -20,7 +20,7 @@ const asset = (p?: string) => (p ? `${base}/${p.replace(/^\//, '')}` : undefined
           <div class="player-box">
             <div class="window-bar mono" aria-hidden="true">
               <span class="lights"><i></i><i></i><i></i></span>
-              <span class="channel-title">demo_0{idx + 1}.mp4</span>
+              <span class="channel-title">{vid.src ? vid.src.split('/').pop() : `demo_0${idx + 1}.mp4`}</span>
               <span class="badge-rec">● REC</span>
             </div>
 
@@ -34,7 +34,7 @@ const asset = (p?: string) => (p ? `${base}/${p.replace(/^\//, '')}` : undefined
                   allowfullscreen
                 ></iframe>
               ) : vid.src ? (
-                <video controls preload="metadata" poster={asset(vid.poster)} title={vid.title}>
+                <video controls preload="metadata" poster={asset(vid.poster)} title={vid.title} playsinline>
                   <source src={asset(vid.src)} type="video/mp4" />
                 </video>
               ) : (
@@ -53,6 +53,13 @@ const asset = (p?: string) => (p ? `${base}/${p.replace(/^\//, '')}` : undefined
             <div class="category mono">{vid.category}</div>
             <h3 class="video-title">{vid.title}</h3>
             <p class="video-desc">{vid.description}</p>
+            {vid.highlights && vid.highlights.length > 0 && (
+              <div class="highlights-list">
+                {vid.highlights.map((h) => (
+                  <span class="highlight-tag mono">{h}</span>
+                ))}
+              </div>
+            )}
           </div>
         </article>
       ))}
@@ -167,6 +174,22 @@ const asset = (p?: string) => (p ? `${base}/${p.replace(/^\//, '')}` : undefined
     color: var(--muted);
     line-height: 1.55;
     margin: 0;
+  }
+
+  .highlights-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .highlight-tag {
+    font-size: 0.68rem;
+    background: rgba(94, 231, 255, 0.08);
+    border: 1px solid rgba(94, 231, 255, 0.2);
+    color: var(--cyan);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
   }
 
   @keyframes blink { 50% { opacity: 0.2; } }

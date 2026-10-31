@@ -27,10 +27,11 @@ export const videos: VideoItem[] = [
     highlights: ['Semtech UDP/1700', 'Continuidad A/B/A', 'Integridad SHA-256', 'Preservación PCAP'],
   },
   {
+    src: 'video/replay.mp4',
     title: 'Video 2 — Ataque de Replay y Detección en Gemelo Digital',
     category: 'Escenario Experimental',
-    description: 'Inyección de tramas repetidas mediante nodo atacante Heltec V4, detección de anomalías de contador y preservación forense de la evidencia.',
-    highlights: ['Nodo Heltec Atacante', 'Replay PHYPayload', 'Regla CONTADOR-01'],
+    description: 'Inyección de tramas repetidas mediante nodo atacante Heltec V4. Se demuestra la diferencia de visibilidad: ChirpStack descarta el replay mientras el capturador preserva las 9 ocurrencias y el gemelo digital señala el indicio.',
+    highlights: ['Nodo Heltec Atacante', 'Replay PHYPayload', 'Regla CONTADOR-01', 'Preservación sin Deduplicar'],
   },
   {
     title: 'Video 3 — Reconstrucción de Caso y Paquete de Evidencia',
